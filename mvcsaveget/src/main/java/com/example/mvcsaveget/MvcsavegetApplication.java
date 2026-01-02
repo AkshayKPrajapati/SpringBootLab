@@ -8,6 +8,7 @@ public class MvcsavegetApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MvcsavegetApplication.class, args);
+		System.out.println("Application is runing");
 	}
 
 }
