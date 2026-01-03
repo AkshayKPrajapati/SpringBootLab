@@ -17,6 +17,10 @@ public class StudentService {
 		System.out.println("student details");
 	}
 	
+	public Iterable<Student> getAllStudent() {
+		Iterable<Student> student = this.studentRepoistroy.findAll();
+		System.out.println("Student : "  +student);
+		return student;
+	}
 	
-
 }
