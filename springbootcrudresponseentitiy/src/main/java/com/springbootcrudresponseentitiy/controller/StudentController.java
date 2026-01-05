@@ -3,6 +3,7 @@ package com.springbootcrudresponseentitiy.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,15 @@ public class StudentController {
 		return "save data ";
 	}
 
+	@PostMapping("/newStudent")
+	public ResponseEntity<String> addNewStudent(@RequestBody Student student) {
+		this.studentService.saveStudentDetails(student);
+		return new ResponseEntity<String>("New Student Added !!!",HttpStatus.CREATED);
+	}
+
+	
+	
+	
 	@GetMapping("StudentAll")
 	  public Iterable<Student> getStudentRecord() {
 		  Iterable<Student> student =this.studentService.getAllStudent();
@@ -51,6 +61,13 @@ public class StudentController {
 	public ResponseEntity<Iterable<Student>> fetchStudentDetails() {
 		Iterable<Student> students = studentService.getAllStudent();
 		return ResponseEntity.ok(students);
+	}
+	
+	
+	@GetMapping("v1/students")
+	public ResponseEntity<Iterable<Student>> getStudents() {
+		Iterable<Student> students = studentService.getAllStudent();
+		return new ResponseEntity<Iterable<Student>>(students,HttpStatus.OK);
 	}
 	
 	@GetMapping("/getStudent/{id}")
@@ -67,9 +84,31 @@ public class StudentController {
 		return student;
 	}
 	
+	
+	@PostMapping("v1/getStudent")
+	public ResponseEntity<Student> studentFindById(@RequestParam int id) {
+
+	    Optional<Student> student = studentService.StudentDetailsById(id);
+
+	    if (student.isPresent()) {
+	        return new ResponseEntity<>(student.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	    }
+	}
+
+	
 	@DeleteMapping("deleteStudentByid/{id}")
 	public String deleteStudent(@PathVariable int id ) {
 		this.studentService.deleteStudent(id);
 		return "Student with ID " + id + " has been deleted successfully";
+	}
+	
+	
+	@DeleteMapping("v1/deleteStudentByid/{id}")
+	public ResponseEntity<String> deleteStudentById(@PathVariable int id ) {
+		this.studentService.deleteStudent(id);
+		//return "Student with ID " + id + " has been deleted successfully";
+		return new ResponseEntity<String>("Student with ID " + id + " has been deleted successfully",HttpStatus.NO_CONTENT );
 	}
 }
