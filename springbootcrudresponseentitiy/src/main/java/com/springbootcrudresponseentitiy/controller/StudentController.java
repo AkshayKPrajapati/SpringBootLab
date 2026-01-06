@@ -16,6 +16,7 @@ import com.springbootcrudresponseentitiy.services.StudentService;
 import ch.qos.logback.core.joran.spi.HttpUtil.RequestMethod;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -111,4 +112,15 @@ public class StudentController {
 		//return "Student with ID " + id + " has been deleted successfully";
 		return new ResponseEntity<String>("Student with ID " + id + " has been deleted successfully",HttpStatus.NO_CONTENT );
 	}
+	
+	@PutMapping("/update/student")
+	public void updateStudent(@RequestBody Student student) {
+	    studentService.updateStudent(student);
+	}
+	@GetMapping("student/findByCity/{city}")
+	public Iterable<Student> getFindByCity(@PathVariable String city) {
+		Iterable<Student> x = this.studentService.findByCityService(city);
+		return x;
+	}
+
 }

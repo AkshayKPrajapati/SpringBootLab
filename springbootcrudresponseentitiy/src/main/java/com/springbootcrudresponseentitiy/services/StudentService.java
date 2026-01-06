@@ -37,4 +37,17 @@ public class StudentService {
 	public void deleteStudent(int id) {
 		 this.studentRepoistroy.deleteById(id);
 	}
+	
+	//update Student
+	public void updateStudent(Student student) {
+        this.studentRepoistroy.save(student);
+    }
+	
+	// findByCity Method 
+	public Iterable<Student> findByCityService(String city) {
+		Iterable<Student> x = this.studentRepoistroy.findByCity(city);
+		System.out.println(x);
+		return x;
+	}
 }
+	
