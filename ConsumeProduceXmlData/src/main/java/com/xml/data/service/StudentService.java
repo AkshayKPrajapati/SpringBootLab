@@ -3,10 +3,15 @@ package com.xml.data.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xml.data.entity.StudentEntity;
 import com.xml.data.repository.StudentRepository;
 
 @Service
 public class StudentService {
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	public void saveStudent(StudentEntity student) {
+		this.studentRepository.save(student);
+	}
 }
