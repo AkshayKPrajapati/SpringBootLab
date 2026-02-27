@@ -4,22 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.xml.data.entity.StudentEntity;
 import com.xml.data.service.StudentService;
-
-@Controller
+@RestController
+@RequestMapping("/students")
 public class StudentController {
-	@Autowired
-	private StudentService studentService;
-	
-	
-	@PostMapping(
-			value="/savaData"
-			)
-	public String addNewStudent(@RequestBody StudentEntity student) {
-		this.studentService.saveStudent(student);
-		System.out.println("data saved ");
-		return "save new student details";
-	}
+
+    @Autowired
+    private StudentService studentService;
+
+    @PostMapping("/save")
+    public String addNewStudent(@RequestBody StudentEntity student) {
+        studentService.saveStudent(student);
+        return "save new student details";
+    }
 }

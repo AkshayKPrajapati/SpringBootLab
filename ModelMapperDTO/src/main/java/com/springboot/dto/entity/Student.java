@@ -1,0 +1,52 @@
+package com.springboot.dto.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Student {
+	@Id
+	private int id;
+	private String name;
+	private String city;
+	private int mark;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public int getMark() {
+		return mark;
+	}
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", city=" + city + ", mark=" + mark + "]";
+	}
+	public Student(int id, String name, String city, int mark) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.city = city;
+		this.mark = mark;
+	}
+	public Student() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+}
